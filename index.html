@@ -1,53 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SC Dosyası Açıcı</title>
-	<script type="module">
-		import ultrapowascTools from 'https://cdn.jsdelivr.net/npm/@ultrapowa/sc-tools@2.0.4/+esm';
-
-		document.addEventListener('DOMContentLoaded', () => {
-			const scTools = new ultrapowascTools();
-			const fileInput = document.getElementById('fileInput');
-			const output = document.getElementById('output');
-
-			fileInput.addEventListener('change', async (event) => {
-				const file = event.target.files[0];
-				if (!file) {
-					output.innerHTML = '<p style="color:red;">Bir dosya seçilmedi!</p>';
-					return;
-				}
-
-				try {
-					// SC dosyasını binary olarak oku
-					const scData = await file.arrayBuffer();
-
-					// SC dosyasını aç
-					const project = scTools.openSC(scData);
-
-					// İçerikleri görüntüle
-					output.innerHTML = `
-					<h3>SC Dosyası Başarıyla Açıldı!</h3>
-					<h4>Dokular:</h4>
-					<ul>${project.textures.map(t => `<li>${t.name}</li>`).join('')}</ul>
-					<h4>Yapılandırmalar:</h4>
-					<pre>${JSON.stringify(project.configs, null, 2)}</pre>
-					`;
-				} catch (error) {
-					console.error(error);
-					output.innerHTML = '<p style="color:red;">SC dosyasını açarken bir hata oluştu.</p>';
-				}
-			});
-		});
-	</script>
-</head>
-<body>
-	<h1>SC Dosyası Görüntüleyici</h1>
-	<p>
-		Bir SC dosyası yükleyin ve içeriğini burada görün.
-	</p>
-	<input type="file" id="fileInput" accept=".sc">
-	<div id="output" style="margin-top: 20px; font-family: monospace; white-space: pre-wrap;"></div>
-</body>
+<html lang="tr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			*, ::before, ::after {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			header {
+				position: fixed;
+				z-index: 2;
+				width: 100%;
+				height: 75px;
+				background: #5c5ca7;
+			}
+			header::before {
+				content: '';
+				display: block;
+				position: relative;
+				top: 75px;
+				width: 0;
+				height: 5px;
+				background: #5c5ca7;
+				border-top-right-radius: 2px;
+				border-bottom-right-radius: 2px;
+			}
+			.c2::before {
+				content: url('c2.svg');
+				display: block;
+				position: absolute;
+				top: 0;
+				width: 75px;
+				height: 75px;
+			}
+			html, body {
+				min-height: 100vh;
+				max-height: 100vh;
+			}
+			body {
+				background: #1f1f1f;
+			}
+			main {
+				
+			}
+			.gallery {
+				position: relative;
+				top: 120px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-direction: column;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="c2"></div>
+		</header>
+		<main>
+			<div class="gallery">
+				<svg viewBox="0 0 1080 1920" width="50%">
+					<use href="img1vw=1080x1920.svg#view"/>
+				</svg>
+			</div>
+			<div class="gallery">
+				<iframe src="http://cdnkey.liveblog365.com/c/cfae55ae-d547-4ac0-9516-5b2827aa46a5" style="border: none; width: 100%; height: 200%;"></iframe>
+			</div>
+		</main>
+	</body>
 </html>
