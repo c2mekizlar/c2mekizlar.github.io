@@ -63,7 +63,10 @@
 		<main>
 			<div class="gallery">
 				<svg viewBox="0 0 1080 1920" width="50%">
-					<use href="img1vw=1080x1920.svg#view"/>
+					<pattern id="img1" x="0" y="0" width="100%" height="100%" patternUnits="objectBoundingBox">
+						<use href="img1vw=1080x1920.svg#view"/>
+					</pattern>
+					<rect fill="url(#img1)" width="100%" height="100%"/>
 				</svg>
 			</div>
 			<div class="gallery">
